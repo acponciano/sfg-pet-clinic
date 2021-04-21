@@ -139,6 +139,7 @@ Desktop.ini
 # ESLint
 ######################
 .eslintcache
+/target/
 pet-clinic-web/target/classes/application.properties
 pet-clinic-web/target/maven-archiver/pom.properties
 pet-clinic-web/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
@@ -158,3 +159,4 @@ pet-clinic-data/target/maven-archiver/pom.properties
 pet-clinic-data/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
 pet-clinic-data/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
 pet-clinic-web/target/surefire-reports/2021-04-21T17-16-38_840.dumpstream
+pet-clinic-web/target/surefire-reports/2021-04-21T17-39-32_299.dumpstream
