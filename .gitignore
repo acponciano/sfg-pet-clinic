@@ -139,3 +139,18 @@ Desktop.ini
 # ESLint
 ######################
 .eslintcache
+pet-clinic-web/target/classes/application.properties
+pet-clinic-web/target/maven-archiver/pom.properties
+pet-clinic-web/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+pet-clinic-web/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+pet-clinic-web/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst
+pet-clinic-web/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst
+pet-clinic-web/target/surefire-reports/2021-04-21T16-26-03_564.dumpstream
+pet-clinic-web/target/surefire-reports/2021-04-21T16-31-28_886.dumpstream
+pet-clinic-web/target/surefire-reports/2021-04-21T16-40-05_127.dumpstream
+pet-clinic-web/target/surefire-reports/2021-04-21T16-41-25_389.dumpstream
+pet-clinic-web/target/surefire-reports/2021-04-21T16-47-46_474.dumpstream
+pet-clinic-web/target/surefire-reports/guru.springframework.sfgpetclinic.SfgPetClinicApplicationTests.txt
+pet-clinic-web/target/surefire-reports/sfgpetclinic.SfgPetClinicApplicationTests.txt
+pet-clinic-web/target/surefire-reports/TEST-guru.springframework.sfgpetclinic.SfgPetClinicApplicationTests.xml
+pet-clinic-web/target/surefire-reports/TEST-sfgpetclinic.SfgPetClinicApplicationTests.xml
