@@ -17,6 +17,8 @@ import guru.springframework.sfgpetclinic.services.OwnerService;
 public class OwnerSDJpaService implements OwnerService {
 
     private final OwnerRepository ownerRepository;
+    private final PetRepository petRepository;
+    private final PetTypeRepository petTypeRepository;
 
     public OwnerSDJpaService(OwnerRepository ownerRepository, PetRepository petRepository,
             PetTypeRepository petTypeRepository) {

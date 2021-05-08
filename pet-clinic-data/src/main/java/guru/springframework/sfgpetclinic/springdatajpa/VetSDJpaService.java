@@ -17,6 +17,8 @@ import guru.springframework.sfgpetclinic.services.VetService;
 public class VetSDJpaService implements VetService {
 
     private final VetRepository vetRepository;
+    private final PetRepository petRepository;
+    private final PetTypeRepository petTypeRepository;
 
     public VetSDJpaService(VetRepository vetRepository, PetRepository petRepository,
             PetTypeRepository petTypeRepository) {
