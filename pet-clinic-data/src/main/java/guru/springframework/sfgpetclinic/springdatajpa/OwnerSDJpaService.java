@@ -1,4 +1,4 @@
-package guru.springframework.springdatajpa;
+package guru.springframework.sfgpetclinic.springdatajpa;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -17,8 +17,6 @@ import guru.springframework.sfgpetclinic.services.OwnerService;
 public class OwnerSDJpaService implements OwnerService {
 
     private final OwnerRepository ownerRepository;
-    private final PetRepository petRepository;
-    private final PetTypeRepository petTypeRepository;
 
     public OwnerSDJpaService(OwnerRepository ownerRepository, PetRepository petRepository,
             PetTypeRepository petTypeRepository) {
