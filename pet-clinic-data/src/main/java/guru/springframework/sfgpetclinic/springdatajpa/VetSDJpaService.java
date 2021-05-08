@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 
 import guru.springframework.sfgpetclinic.model.Vet;
 import guru.springframework.sfgpetclinic.repositories.VetRepository;
-import guru.springframework.sfgpetclinic.repositories.PetRepository;
-import guru.springframework.sfgpetclinic.repositories.PetTypeRepository;
 import guru.springframework.sfgpetclinic.services.VetService;
 
 @Service
@@ -17,14 +15,9 @@ import guru.springframework.sfgpetclinic.services.VetService;
 public class VetSDJpaService implements VetService {
 
     private final VetRepository vetRepository;
-    private final PetRepository petRepository;
-    private final PetTypeRepository petTypeRepository;
 
-    public VetSDJpaService(VetRepository vetRepository, PetRepository petRepository,
-            PetTypeRepository petTypeRepository) {
+    public VetSDJpaService(VetRepository vetRepository) {
         this.vetRepository = vetRepository;
-        this.petRepository = petRepository;
-        this.petTypeRepository = petTypeRepository;
     }
 
     @Override
