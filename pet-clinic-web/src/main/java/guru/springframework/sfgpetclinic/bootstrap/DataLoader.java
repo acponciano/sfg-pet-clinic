@@ -2,9 +2,10 @@ package guru.springframework.sfgpetclinic.bootstrap;
 
 import java.time.LocalDate;
 
-import org.apache.tomcat.jni.Local;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import lombok.extern.slf4j.Slf4j;
 
 import guru.springframework.sfgpetclinic.model.Owner;
 import guru.springframework.sfgpetclinic.model.Pet;
@@ -18,6 +19,7 @@ import guru.springframework.sfgpetclinic.services.SpecialtyService;
 import guru.springframework.sfgpetclinic.services.VetService;
 import guru.springframework.sfgpetclinic.services.VisitService;
 
+@Slf4j
 @Component
 public class DataLoader implements CommandLineRunner {
 
@@ -51,6 +53,11 @@ public class DataLoader implements CommandLineRunner {
         PetType dog = new PetType();
         dog.setName("Dog");
         PetType savedDogType = PetTypeService.save(dog);
+        log.info("######################################################");
+        log.info("######################################################");
+        log.info("bootstrap.loaddata - Dog saved");
+        log.info("######################################################");
+        log.info("######################################################");
 
         PetType cat = new PetType();
         dog.setName("Cat");
