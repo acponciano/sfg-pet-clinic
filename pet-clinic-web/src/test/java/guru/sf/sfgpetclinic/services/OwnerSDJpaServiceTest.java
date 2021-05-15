@@ -2,6 +2,7 @@ package guru.sf.sfgpetclinic.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.verify;
@@ -88,6 +89,16 @@ public class OwnerSDJpaServiceTest {
 		assertNotNull(actualValue);
 		assertEquals(LAST_NAME1, actualValue.getLastName());
 		assertEquals(OWNER_ID1, actualValue.getId());
+	}
+
+	@Test
+	public void shouldNotFindById() {
+
+		when(ownerRepository.findById(anyLong())).thenReturn(Optional.empty());
+
+		Owner actualValue = service.findById(OWNER_ID1);
+
+		assertNull(actualValue);
 	}
 
 	@Test
