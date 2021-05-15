@@ -1,4 +1,4 @@
-package guru.springframework.sfgpetclinic.repositories;
+package guru.sf.sfgpetclinic.repositories;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

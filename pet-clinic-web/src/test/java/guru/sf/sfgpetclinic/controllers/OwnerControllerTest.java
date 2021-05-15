@@ -1,4 +1,4 @@
-package guru.springframework.sfgpetclinic.controllers;
+package guru.sf.sfgpetclinic.controllers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anySet;

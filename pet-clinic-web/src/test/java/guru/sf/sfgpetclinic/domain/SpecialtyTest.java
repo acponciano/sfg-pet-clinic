@@ -1,4 +1,4 @@
-package guru.springframework.sfgpetclinic.domain;
+package guru.sf.sfgpetclinic.domain;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

@@ -10,7 +10,7 @@ import guru.sf.sfgpetclinic.services.PetTypeService;
 
 @Service
 @Profile({ "default", "map" })
-public class PetMapTypeService extends AbstractMapService<PetType, Long> implements PetTypeService {
+public class PetTypeMapService extends AbstractMapService<PetType, Long> implements PetTypeService {
 
     @Override
     public Set<PetType> findAll() {
