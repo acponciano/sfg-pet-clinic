@@ -1,6 +1,8 @@
 package guru.sf.sfgpetclinic.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.Set;
 
@@ -19,13 +21,15 @@ public class OwnerMapServiceTest {
 
 	OwnerMapService ownerMapService;
 
-	final Long onwerId = 1L;
+	final Long ownerId1 = 1L;
+	final Long ownerId2 = 1L;
+	final String lastName1 = "lastName1";
 
 	@BeforeEach
 	public void setup() {
 		this.ownerMapService = new OwnerMapService(new PetTypeMapService(), new PetMapService());
 
-		ownerMapService.save(Owner.builder().id(onwerId).build());
+		ownerMapService.save(Owner.builder().id(ownerId1).lastName(lastName1).build());
 	}
 
 	@Test
@@ -37,51 +41,80 @@ public class OwnerMapServiceTest {
 
 	@Test
 	public void shouldFindById() {
-		// TODO: initialize args
-		Long id = null;
 
-		Owner actualValue = ownerMapService.findById(id);
+		Owner actualValue = ownerMapService.findById(ownerId1);
 
-		// TODO: assert scenario
+		assertEquals(1, actualValue.getId());
+
 	}
 
 	@Test
-	public void shouldSave() {
-		// TODO: initialize args
-		Owner object = null;
+	public void shouldSaveExistingId() {
+		Owner object = new Owner();
+		object.setId(ownerId2);
+		object.setAddress("address");
+		object.setCity("city");
+		object.setFirstName("firstName");
+		object.setLastName("lastName");
+		object.setTelephone("telephone");
 
 		Owner actualValue = ownerMapService.save(object);
 
-		// TODO: assert scenario
+		assertNotNull(actualValue);
+		assertEquals(ownerId2, actualValue.getId());
+		assertEquals("address", actualValue.getAddress());
+		assertEquals("city", actualValue.getCity());
+		assertEquals("firstName", actualValue.getFirstName());
+		assertEquals("lastName", actualValue.getLastName());
+		assertEquals("telephone", actualValue.getTelephone());
+
+	}
+
+	@Test
+	public void shouldSaveNoId() {
+		Owner object = new Owner();
+		object.setAddress("address");
+		object.setCity("city");
+		object.setFirstName("firstName");
+		object.setLastName("lastName");
+		object.setTelephone("telephone");
+
+		Owner actualValue = ownerMapService.save(object);
+
+		assertNotNull(actualValue);
+		assertNotNull(actualValue.getId());
+		assertEquals("address", actualValue.getAddress());
+		assertEquals("city", actualValue.getCity());
+		assertEquals("firstName", actualValue.getFirstName());
+		assertEquals("lastName", actualValue.getLastName());
+		assertEquals("telephone", actualValue.getTelephone());
+
 	}
 
 	@Test
 	public void shouldDelete() {
-		// TODO: initialize args
-		Owner object = null;
+		ownerMapService.delete(ownerMapService.findById(ownerId1));
 
-		ownerMapService.delete(object);
-
-		// TODO: assert scenario
+		assertEquals(0, ownerMapService.findAll().size());
 	}
 
 	@Test
 	public void shouldDeleteById() {
-		// TODO: initialize args
-		Long id = null;
+		ownerMapService.deleteById(ownerId1);
 
-		ownerMapService.deleteById(id);
-
-		// TODO: assert scenario
+		assertEquals(0, ownerMapService.findAll().size());
 	}
 
 	@Test
 	public void shouldFindByLastName() {
-		// TODO: initialize args
-		String lastName = null;
+		Owner actualValue = ownerMapService.findByLastName(lastName1);
+		assertEquals(lastName1, actualValue.getLastName());
+		assertEquals(ownerId1, actualValue.getId());
+	}
 
-		Owner actualValue = ownerMapService.findByLastName(lastName);
-
-		// TODO: assert scenario
+	@Test
+	public void shouldFindByLastNameNotFound() {
+		Owner actualValue = ownerMapService.findByLastName("foo");
+		assertNull(actualValue);
 	}
 }
