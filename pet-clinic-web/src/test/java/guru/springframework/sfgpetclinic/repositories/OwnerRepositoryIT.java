@@ -9,7 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import guru.springframework.sfgpetclinic.model.Owner;
+import guru.sf.sfgpetclinic.model.Owner;
+import guru.sf.sfgpetclinic.repositories.OwnerRepository;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest

@@ -22,8 +22,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 
-import guru.springframework.sfgpetclinic.model.Owner;
-import guru.springframework.sfgpetclinic.services.OwnerService;
+import guru.sf.sfgpetclinic.controllers.OwnerController;
+import guru.sf.sfgpetclinic.model.Owner;
+import guru.sf.sfgpetclinic.services.OwnerService;
 
 public class OwnerControllerTest {
 
