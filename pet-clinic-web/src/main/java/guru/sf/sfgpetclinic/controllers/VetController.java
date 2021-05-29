@@ -48,6 +48,13 @@ public class VetController {
         return "vets/update";
     }
 
+    @RequestMapping({ "/add" })
+    public String addVet(Model model) {
+        model.addAttribute("vet", new Vet());
+
+        return "vets/update";
+    }
+
     @PostMapping({ "", "/" })
     public String saveOrUpdate(@ModelAttribute Vet vet) {
 

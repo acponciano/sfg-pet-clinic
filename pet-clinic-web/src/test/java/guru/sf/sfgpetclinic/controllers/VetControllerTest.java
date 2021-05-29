@@ -115,4 +115,31 @@ public class VetControllerTest {
         verify(service, times(1)).save(any());
 
     }
+
+    @Test
+    public void shouldStartAddVet() throws Exception {
+
+        mockMvc.perform(get("/vets/add")).andExpect(status().isOk()).andExpect(view().name("vets/update"));
+
+        verify(service, times(0)).findById(any());
+
+    }
+
+    @Test
+    public void shouldAddVet() throws Exception {
+
+        // Given
+        Vet vet = new Vet(4L, "test new First Name", "test new Last Name");
+
+        when(service.save(any())).thenReturn(vet);
+
+        mockMvc.perform(post("/vets").contentType(MediaType.APPLICATION_FORM_URLENCODED).param("id", "")
+                .param("firstName", vet.getFirstName()).param("lastName", vet.getLastName()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/vets/" + vet.getId() + "/show"));
+
+        verify(service, times(1)).save(any());
+
+    }
+
 }
