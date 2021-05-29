@@ -1,17 +1,14 @@
 package guru.sf.sfgpetclinic.controllers;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.eq;
+import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
-import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-import static org.hamcrest.Matchers.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -19,7 +16,6 @@ import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -79,6 +75,15 @@ public class OwnerControllerTest {
         mockMvc.perform(get("/owners/find")).andExpect(status().isOk()).andExpect(view().name("notImplemented"));
 
         verifyNoInteractions(ownerService);
+
+    }
+
+    @Test
+    public void shouldShowOwner() throws Exception {
+
+        mockMvc.perform(get("/owners/1/show")).andExpect(status().isOk()).andExpect(view().name("owners/1/show"));
+
+        verify(ownerService, times(1)).findById(1L);
 
     }
 }

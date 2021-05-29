@@ -49,7 +49,7 @@ public class OwnerSDJpaServiceTest {
 
 	@BeforeEach
 	public void setup() {
-		this.service = new OwnerSDJpaService(ownerRepository, petRepository, petTypeRepository);
+		this.service = new OwnerSDJpaService(ownerRepository);
 
 		returnOwner = Owner.builder().id(OWNER_ID1).lastName(LAST_NAME1).build();
 

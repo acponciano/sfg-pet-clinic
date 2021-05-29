@@ -1,5 +1,6 @@
 package guru.sf.sfgpetclinic.services.map;
 
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.context.annotation.Profile;
@@ -63,8 +64,12 @@ public class VetMapService extends AbstractMapService<Vet, Long> implements VetS
 
     @Override
     public Vet findByLastName(String lastName) {
-        // TODO Auto-generated method stub
-        return null;
+        Optional<Vet> vet = super.findAll().stream().filter(v -> v.getLastName().startsWith(lastName)).findFirst();
+        if (vet.isPresent()) {
+            return vet.get();
+        } else {
+            return null;
+        }
     }
 
 }

@@ -36,13 +36,12 @@
                                         <th style="width: 150px;">Last Name</th>
                                     </tr>
                                 </thead>
-                                <tr th:each="owner : ${owners}">
+                                <tr>
                                     <td th:text="${owner.id}">1</td>
+                                </tr>
+                                <tr>
                                     <td th:text="${owner.firstName}">Joe</td>
                                     <td th:text="${owner.lastName}">Buck</td>
-                                    <td><a href="#" th:href="@{'/owners/' + ${owner.id} + '/show'}">View</a></td>
-                                    <td><a href="#" th:href="@{'/owners/' + ${owner.id} + '/update'}">Update</a></td>
-                                    <td><a href="#" th:href="@{'/owners/' + ${owner.id} + '/delete'}">Delete</a></td>
                                 </tr>
                             </table>
                         </div>
