@@ -31,25 +31,16 @@
                             <thead class="thead-inverse">
                                 <tr>
                                     <th style="width: 150px;">Id</th>
-                                    <th style="width: 150px;">First Name</th>
-                                    <th style="width: 150px;">Last Name</th>
-                                    <th style="width: 150px;">Image</th>
-                                    <th style="width: 150px;">Actions</th>
                                 </tr>
                             </thead>
                             <tr>
-                                <td th:text="${vet.id}">1</td>
-                                <td th:text="${vet.firstName}">Joe</td>
-                                <td th:text="${vet.lastName}">Buck</td>
+                                <td th:text="${id}">1</td>
                                 <td>
                                     <img src="/resources/images/platform-bg.png" width=120
                                         th:if="${vet == null || vet.image == null}">
                                     <img src="/resources/images/platform-bg.png"
                                         th:if="${vet != null && vet.image != null}"
-                                        th:src="@{'/images/' + ${vet.image.id} + '/show'}" width="200">
-                                </td>
-                                <td><a href="#" th:href="@{'/vets/' + ${vet.id} + '/update'}">Update</a>
-                                    <a href="#" th:href="@{'/vets/' + ${vet.id} + '/delete'}">Delete</a>
+                                        th:src="@{'/images/' + ${vet.image.id + '/show'}" width="200" height="200">
                                 </td>
                             </tr>
                         </table>

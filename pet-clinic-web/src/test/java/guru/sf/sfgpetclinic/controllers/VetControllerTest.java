@@ -91,7 +91,7 @@ public class VetControllerTest {
     }
 
     @Test
-    public void shouldStartUpdateVet() throws Exception {
+    public void shouldUpdateVetForm() throws Exception {
 
         mockMvc.perform(get("/vets/1/update")).andExpect(status().isOk()).andExpect(view().name("vets/update"));
 
@@ -117,7 +117,7 @@ public class VetControllerTest {
     }
 
     @Test
-    public void shouldStartAddVet() throws Exception {
+    public void shouldAddVetForm() throws Exception {
 
         mockMvc.perform(get("/vets/add")).andExpect(status().isOk()).andExpect(view().name("vets/update"));
 

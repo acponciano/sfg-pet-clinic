@@ -34,6 +34,7 @@
                                         <th style="width: 150px;">Id</th>
                                         <th style="width: 150px;">First Name</th>
                                         <th style="width: 150px;">Last Name</th>
+                                        <th style="width: 150px;">Image</th>
                                     </tr>
                                 </thead>
                                 <tr>
@@ -42,9 +43,17 @@
                                     <input type="hidden" th:field="*{id}" />
                                     <td><input type="text" class="form-control" th:field="*{firstName}" /></td>
                                     <td><input type="text" class="form-control" th:field="*{lastName}" /></td>
+                                    <td>
+                                        <img src="/resources/images/platform-bg.png" width=100
+                                            th:if="${vet == null || vet.image == null}">
+                                        <img src="/resources/images/platform-bg.png"
+                                            th:if="${vet != null && vet.image != null}"
+                                            th:src="@{'/images/' + ${vet.image.id + '/show'}}" width="200">
+                                    </td>
                                 </tr>
                             </table>
                             <button type="submit" class="btn btn-primary">Save</button>
+                            <a href="#" th:href="@{'/vets'}">List All</a>
                         </div>
                     </div>
                 </form>

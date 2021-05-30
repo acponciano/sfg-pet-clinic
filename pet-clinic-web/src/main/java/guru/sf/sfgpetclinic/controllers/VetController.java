@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import guru.sf.sfgpetclinic.model.Image;
 import guru.sf.sfgpetclinic.model.Vet;
+import guru.sf.sfgpetclinic.services.ImageService;
 import guru.sf.sfgpetclinic.services.VetService;
 
 @RequestMapping({ "/vets" })
@@ -15,9 +17,11 @@ import guru.sf.sfgpetclinic.services.VetService;
 public class VetController {
 
     private final VetService vetService;
+    private final ImageService imageService;
 
-    public VetController(VetService vetService) {
+    public VetController(VetService vetService, ImageService imageService) {
         this.vetService = vetService;
+        this.imageService = imageService;
     }
 
     @RequestMapping({ "", "/", ".html", "/index.html" })
@@ -48,6 +52,20 @@ public class VetController {
         return "vets/update";
     }
 
+    @RequestMapping({ "/{id}/saveImage/{imageId}" })
+    public String saveImageVet(Model model, @PathVariable Long id, @PathVariable Long imageId) {
+
+        Vet vet = vetService.findById(id);
+        if (vet != null) {
+            Image image = imageService.findById(imageId);
+            image.setId(imageId);
+            vet.setImage(image);
+            vetService.save(vet);
+        }
+
+        return "redirect:/vets";
+    }
+
     @RequestMapping({ "/add" })
     public String addVet(Model model) {
         model.addAttribute("vet", new Vet());
@@ -58,16 +76,7 @@ public class VetController {
     @PostMapping({ "", "/" })
     public String saveOrUpdate(@ModelAttribute Vet vet) {
 
-        System.out.println("Vet = START");
-        System.out.println("Vet = " + vet);
-        System.out.println("Vet = " + vet.getId());
-        System.out.println("Vet = " + vet.getFirstName());
-
         Vet savedVet = vetService.save(vet);
-
-        System.out.println("Saved Vet = " + savedVet);
-        System.out.println("Saved Vet = " + savedVet.getId());
-        System.out.println("Saved Vet = " + savedVet.getFirstName());
 
         return "redirect:/vets/" + savedVet.getId() + "/show";
     }

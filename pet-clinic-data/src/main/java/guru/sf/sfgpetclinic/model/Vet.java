@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Builder;
@@ -31,13 +32,17 @@ public class Vet extends Person {
         super(id, firstName, lastName);
     }
 
-    public Vet(Set<Specialty> specialties) {
+    public Vet(Set<Specialty> specialties, Image image) {
         super();
-        specialties = this.specialties;
+        this.specialties = specialties;
+        this.image = image;
     }
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "vet_specialties", joinColumns = @JoinColumn(name = "vet_id"), inverseJoinColumns = @JoinColumn(name = "specialty_id"))
     private Set<Specialty> specialties = new HashSet<>();
 
+    @ManyToOne
+    @JoinColumn(name = "image_id")
+    private Image image;
 }
