@@ -30,6 +30,9 @@ import lombok.Setter;
 @Table(name = "pets")
 public class Pet extends NamedEntity {
 
+    @Column(name = "name")
+    private String name;
+
     @ManyToOne
     @JoinColumn(name = "type_id")
     private PetType petType;

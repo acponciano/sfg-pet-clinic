@@ -1,6 +1,7 @@
 package guru.sf.sfgpetclinic.bootstrap;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -52,14 +53,9 @@ public class DataLoader implements CommandLineRunner {
         PetType dog = new PetType();
         dog.setName("Dog");
         PetType savedDogType = PetTypeService.save(dog);
-        log.info("######################################################");
-        log.info("######################################################");
-        log.info("bootstrap.loaddata - Dog saved");
-        log.info("######################################################");
-        log.info("######################################################");
 
         PetType cat = new PetType();
-        dog.setName("Cat");
+        cat.setName("Cat");
         PetType savedCatType = PetTypeService.save(cat);
 
         Owner owner1 = new Owner();
@@ -81,9 +77,9 @@ public class DataLoader implements CommandLineRunner {
         Owner owner2 = new Owner();
         owner2.setFirstName("Fiona");
         owner2.setLastName("Glenanne");
-        owner1.setAddress("123 Brickerel");
-        owner1.setCity("Recife");
-        owner1.setTelephone("123123123");
+        owner2.setAddress("123456 Brickerel");
+        owner2.setCity("Recife");
+        owner2.setTelephone("123123123");
 
         Pet fionasPet = new Pet();
         fionasPet.setName("JustCat");
@@ -109,6 +105,19 @@ public class DataLoader implements CommandLineRunner {
         visitService.save(dogVisit);
 
         System.out.println("Loaded Owners....");
+
+        Owner firstOwner = ownerService.findById(1L);
+        System.out.println(firstOwner.getId());
+        System.out.println(firstOwner.getLastName());
+        System.out.println(firstOwner.getAddress());
+        Owner secondOwner = ownerService.findById(2L);
+        System.out.println(secondOwner.getId());
+        System.out.println(secondOwner.getLastName());
+        System.out.println(secondOwner.getAddress());
+        Owner thirdOwner = ownerService.findById(3L);
+        System.out.println(thirdOwner.getId());
+        System.out.println(thirdOwner.getLastName());
+        System.out.println(thirdOwner.getAddress());
 
         Specialty radiology = new Specialty();
         radiology.setDescription("Radiology");
