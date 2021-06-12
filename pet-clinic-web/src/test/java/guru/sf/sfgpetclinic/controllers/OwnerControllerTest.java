@@ -74,7 +74,7 @@ public class OwnerControllerTest {
     @Test
     public void shouldListOwners() throws Exception {
         System.out.println("Owner Controller Tes - shouldListOwners");
-        when(ownerService.findAllByLastNameLike("")).thenReturn(null);
+        when(ownerService.findAllByLastNameLike("")).thenReturn(new ArrayList<>());
 
         mockMvc.perform(get("/owners")).andExpect(status().isOk()).andExpect(view().name("owners/findOwners"));
 
