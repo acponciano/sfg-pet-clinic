@@ -1,9 +1,10 @@
 package guru.sf.sfgpetclinic.controllers;
 
-import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.hasProperty;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
@@ -45,8 +46,8 @@ public class OwnerControllerTest {
     public void setUp() {
 
         owners = new HashSet<>();
-        owners.add(Owner.builder().id(1L).build());
-        owners.add(Owner.builder().id(2L).build());
+        owners.add(Owner.builder().id(1L).lastName("LastName1").build());
+        owners.add(Owner.builder().id(2L).lastName("LastName2").build());
 
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 
@@ -82,9 +83,24 @@ public class OwnerControllerTest {
     }
 
     @Test
+    public void shouldProcessoFindFormReturnMany() throws Exception {
+
+        /*
+         * TODO Implement controller method
+         * when(ownerService.findAllByLastName(anyString())).thenReturn(owners);
+         * 
+         * mockMvc.perform(get("/owners/find")).andExpect(status().isOk()).andExpect(
+         * view().name("owners/ownerList")) .andExpect(model().attribute("owners",
+         * hasSize(2)));
+         * 
+         * verify(ownerService, times(1)).findAllByLastName(anyString());
+         */
+    }
+
+    @Test
     public void shouldShowOwner() throws Exception {
 
-        mockMvc.perform(get("/owners/1L/show")).andExpect(status().isOk()).andExpect(view().name("owners/1L/show"));
+        mockMvc.perform(get("/owners/1/show")).andExpect(status().isOk()).andExpect(view().name("owners/1/show"));
 
         verify(ownerService, times(1)).findById(1L);
 
