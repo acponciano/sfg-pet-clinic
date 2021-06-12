@@ -14,7 +14,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -38,16 +41,21 @@ public class OwnerControllerTest {
     @InjectMocks
     OwnerController controller;
 
-    Set<Owner> owners;
+    Set<Owner> ownersSet;
+    List<Owner> ownersList;
 
     MockMvc mockMvc;
 
     @BeforeEach
     public void setUp() {
 
-        owners = new HashSet<>();
-        owners.add(Owner.builder().id(1L).lastName("LastName1").build());
-        owners.add(Owner.builder().id(2L).lastName("LastName2").build());
+        ownersSet = new HashSet<>();
+        ownersSet.add(Owner.builder().id(1L).lastName("LastName1").build());
+        ownersSet.add(Owner.builder().id(2L).lastName("LastName2").build());
+
+        ownersList = new ArrayList<>();
+        ownersList.add(Owner.builder().id(1L).lastName("LastName1").build());
+        ownersList.add(Owner.builder().id(2L).lastName("LastName2").build());
 
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 
@@ -55,46 +63,57 @@ public class OwnerControllerTest {
 
     @Test
     public void testmockMVCIndexUrl() throws Exception {
+        System.out.println("Owner Controller Tes - testmockMVCIndexUrl");
 
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 
-        mockMvc.perform(get("/owners/index.html")).andExpect(view().name("owners/index")).andExpect(status().isOk());
+        mockMvc.perform(get("/owners")).andExpect(view().name("owners/findOwners")).andExpect(status().isOk());
 
     }
 
     @Test
     public void shouldListOwners() throws Exception {
+        System.out.println("Owner Controller Tes - shouldListOwners");
+        when(ownerService.findAllByLastNameLike("")).thenReturn(null);
 
-        when(ownerService.findAll()).thenReturn(owners);
+        mockMvc.perform(get("/owners")).andExpect(status().isOk()).andExpect(view().name("owners/findOwners"));
 
-        mockMvc.perform(get("/owners")).andExpect(status().isOk()).andExpect(view().name("owners/index"))
-                .andExpect(model().attribute("owners", hasSize(2)));
-
-        verify(ownerService, times(1)).findAll();
+        verify(ownerService, times(1)).findAllByLastNameLike(anyString());
     }
 
     @Test
     public void shouldFindOwners() throws Exception {
 
-        mockMvc.perform(get("/owners/find")).andExpect(status().isOk()).andExpect(view().name("notImplemented"));
+        mockMvc.perform(get("/owners/find")).andExpect(status().isOk()).andExpect(view().name("owners/findOwners"));
 
         verifyNoInteractions(ownerService);
 
     }
 
     @Test
-    public void shouldProcessoFindFormReturnMany() throws Exception {
+    public void shouldProcessFindFormReturnMany() throws Exception {
+        System.out.println("Owner Controller Tes - shouldProcessFindFormReturnMany");
 
-        /*
-         * TODO Implement controller method
-         * when(ownerService.findAllByLastName(anyString())).thenReturn(owners);
-         * 
-         * mockMvc.perform(get("/owners/find")).andExpect(status().isOk()).andExpect(
-         * view().name("owners/ownerList")) .andExpect(model().attribute("owners",
-         * hasSize(2)));
-         * 
-         * verify(ownerService, times(1)).findAllByLastName(anyString());
-         */
+        when(ownerService.findAllByLastNameLike(anyString())).thenReturn(ownersList);
+
+        mockMvc.perform(get("/owners")).andExpect(status().isOk()).andExpect(view().name("owners/ownersList"))
+                .andExpect(model().attribute("owners", hasSize(2)));
+
+        verify(ownerService, times(1)).findAllByLastNameLike(anyString());
+
+    }
+
+    @Test
+    public void shouldProcessFindFormReturnOne() throws Exception {
+        System.out.println("Owner Controller Tes - shouldProcessFindFormReturnOne");
+
+        when(ownerService.findAllByLastNameLike(anyString())).thenReturn(Arrays.asList(Owner.builder().id(1L).build()));
+
+        mockMvc.perform(get("/owners")).andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/owners/1"));
+
+        verify(ownerService, times(1)).findAllByLastNameLike(anyString());
+
     }
 
     @Test
@@ -109,10 +128,10 @@ public class OwnerControllerTest {
     @Test
     public void shouldDisplayOwner() throws Exception {
 
-        when(ownerService.findById(anyLong())).thenReturn(Owner.builder().id(1L).build());
+        when(ownerService.findById(anyLong())).thenReturn(Owner.builder().id(123L).build());
 
         mockMvc.perform(get("/owners/123")).andExpect(status().isOk()).andExpect(view().name("owners/ownerDetails"))
-                .andExpect(model().attribute("owner", hasProperty("id", is(1L))));
+                .andExpect(model().attribute("owner", hasProperty("id", is(123L))));
 
         verify(ownerService, times(1)).findById(123L);
 

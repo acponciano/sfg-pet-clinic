@@ -1,9 +1,8 @@
 package guru.sf.sfgpetclinic.services.map;
 
-import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
@@ -20,6 +19,7 @@ public class OwnerMapService extends AbstractMapService<Owner, Long> implements 
 
     private final PetTypeService petTypeService;
     private final PetService petService;
+    private Set<Owner> owners;
 
     public OwnerMapService(PetTypeService petTypeService, PetService petService) {
         this.petTypeService = petTypeService;
@@ -82,11 +82,11 @@ public class OwnerMapService extends AbstractMapService<Owner, Long> implements 
     }
 
     @Override
-    public Set<Owner> findAllByLastName(String lastName) {
+    public List<Owner> findAllByLastNameLike(String lastName) {
 
-        Set<Owner> collect = this.findAll().stream().filter(owner -> owner.getLastName().equalsIgnoreCase(lastName))
-                .collect(Collectors.toCollection(HashSet::new));
-        Set<Owner> set = collect;
-        return set;
+        // TODO - impl
+        this.findAll().stream().filter(owner -> owner.getLastName().equalsIgnoreCase(lastName))
+                .collect(Collectors.toList());
+        return null;
     }
 }

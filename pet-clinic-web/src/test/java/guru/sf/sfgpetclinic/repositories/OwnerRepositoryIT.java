@@ -26,9 +26,9 @@ public class OwnerRepositoryIT {
     @Test
     public void testFindByLastName() throws Exception {
 
-        Owner owner = ownerRepository.findByLastName("Glenanne");
+        Owner owner = ownerRepository.findByLastName("Database script");
 
-        assertEquals("Glenanne", owner.getLastName());
+        assertEquals("Database script", owner.getLastName());
     }
 
 }

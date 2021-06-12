@@ -1,6 +1,7 @@
 package guru.sf.sfgpetclinic.springdatajpa;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.context.annotation.Profile;
@@ -22,6 +23,7 @@ public class OwnerSDJpaService implements OwnerService {
 
     @Override
     public Owner findByLastName(String lastName) {
+        System.out.println("Owner repository - findBy LastName");
         return ownerRepository.findByLastName(lastName);
     }
 
@@ -57,7 +59,7 @@ public class OwnerSDJpaService implements OwnerService {
     }
 
     @Override
-    public Set<Owner> findAllByLastName(String lastName) {
+    public List<Owner> findAllByLastNameLike(String lastName) {
         return ownerRepository.findAllByLastName(lastName);
     }
 

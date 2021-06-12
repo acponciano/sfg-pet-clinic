@@ -1,7 +1,6 @@
 package guru.sf.sfgpetclinic.bootstrap;
 
 import java.time.LocalDate;
-import java.util.Set;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
