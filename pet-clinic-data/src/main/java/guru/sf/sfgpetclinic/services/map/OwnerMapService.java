@@ -84,7 +84,6 @@ public class OwnerMapService extends AbstractMapService<Owner, Long> implements 
     @Override
     public List<Owner> findAllByLastNameLike(String lastName) {
 
-        // TODO - impl
         this.findAll().stream().filter(owner -> owner.getLastName().equalsIgnoreCase(lastName))
                 .collect(Collectors.toList());
         return null;
