@@ -23,4 +23,8 @@ public class BaseEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
+    public Boolean isNew() {
+        return this.Id == null;
+    }
+
 }
