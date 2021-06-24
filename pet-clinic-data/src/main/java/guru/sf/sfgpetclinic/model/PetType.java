@@ -16,10 +16,15 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
 @Table(name = "types")
 public class PetType extends BaseEntity {
+
+    @Builder
+    public PetType(Long Id, String name) {
+        super(Id);
+        this.name = name;
+    }
 
     private String name;
 
