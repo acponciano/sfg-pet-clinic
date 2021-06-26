@@ -121,6 +121,8 @@ public class OwnerControllerTest {
     @Test
     public void shouldShowOwner() throws Exception {
 
+        when(ownerService.findById(anyLong())).thenReturn(Owner.builder().id(1L).build());
+
         mockMvc.perform(get("/owners/1/show")).andExpect(status().isOk()).andExpect(view().name("owners/1/show"));
 
         verify(ownerService, times(1)).findById(1L);

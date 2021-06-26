@@ -4,16 +4,20 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import guru.sf.sfgpetclinic.exceptions.NotFoundException;
 import guru.sf.sfgpetclinic.model.Owner;
 import guru.sf.sfgpetclinic.services.OwnerService;
 
@@ -78,7 +82,14 @@ public class OwnerController {
 
     @RequestMapping({ "/{id}/show" })
     public String showOwner(Model model, @PathVariable Long id) {
-        model.addAttribute("owners", ownerService.findById(id));
+
+        Owner owner = ownerService.findById(id);
+
+        if (owner == null) {
+            throw new NotFoundException("Owner ID " + id.toString() + " not found");
+        }
+
+        model.addAttribute("owners", owner);
 
         return "owners/" + id + "/show";
     }
@@ -87,7 +98,13 @@ public class OwnerController {
     public ModelAndView showOwner(@PathVariable Long ownerId) {
         ModelAndView mav = new ModelAndView("owners/ownerDetails");
 
-        mav.addObject(ownerService.findById(ownerId));
+        Owner owner = ownerService.findById(ownerId);
+
+        if (owner == null) {
+            throw new NotFoundException("Owner ID " + ownerId.toString() + " not found");
+        }
+
+        mav.addObject(owner);
         return mav;
     }
 
@@ -123,6 +140,18 @@ public class OwnerController {
             Owner savedOwner = ownerService.save(owner);
             return "redirect:/owners/" + savedOwner.getId();
         }
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NotFoundException.class)
+    public ModelAndView handleNotFound(Exception exception) {
+
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.setViewName("404error");
+        modelAndView.addObject("exception", exception);
+
+        return modelAndView;
     }
 
 }
