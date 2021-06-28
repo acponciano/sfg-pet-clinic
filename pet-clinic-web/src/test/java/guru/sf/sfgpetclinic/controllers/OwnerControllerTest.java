@@ -187,4 +187,18 @@ public class OwnerControllerTest {
 
     }
 
+    @Test
+    public void shouldHandle404NotFound() throws Exception {
+
+        mockMvc.perform(post("/owners/555/show")).andExpect(status().isNotFound()).andExpect(view().name("404error"))
+                .andExpect(model().attributeExists("exception"));
+    }
+
+    @Test
+    public void shouldHandle400BadRequest() throws Exception {
+
+        mockMvc.perform(get("/owners/ASDF/show")).andExpect(status().isBadRequest()).andExpect(view().name("400error"))
+                .andExpect(model().attributeExists("exception"));
+    }
+
 }
