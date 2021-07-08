@@ -59,7 +59,8 @@ public class OwnerControllerTest {
         ownersList.add(Owner.builder().id(1L).lastName("LastName1").build());
         ownersList.add(Owner.builder().id(2L).lastName("LastName2").build());
 
-        mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(controller).setControllerAdvice(new ControllerExceptionHandler())
+                .build();
 
     }
 

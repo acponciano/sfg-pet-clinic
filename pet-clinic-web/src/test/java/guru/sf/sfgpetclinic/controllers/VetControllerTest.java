@@ -55,7 +55,8 @@ public class VetControllerTest {
     @Test
     public void testmockMVCIndexUrl() throws Exception {
 
-        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller)
+                .setControllerAdvice(new ControllerExceptionHandler()).build();
 
         mockMvc.perform(get("/vets/index.html")).andExpect(view().name("vets/index")).andExpect(status().isOk());
 

@@ -11,6 +11,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -41,7 +42,8 @@ public class ImageControllerTest {
     public void setUp() throws Exception {
 
         controller = new ImageController(service);
-        mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(controller).setControllerAdvice(new ControllerExceptionHandler())
+                .build();
     }
 
     @Test
@@ -111,4 +113,12 @@ public class ImageControllerTest {
 
         assertEquals(s.getBytes().length, reponseBytes.length);
     }
+
+    @Test
+    public void shouldHandleNumberFormatException() throws Exception {
+
+        mockMvc.perform(get("/images/ASDF/show")).andExpect(status().isBadRequest()).andExpect(view().name("400error"))
+                .andExpect(model().attributeExists("exception"));
+    }
+
 }

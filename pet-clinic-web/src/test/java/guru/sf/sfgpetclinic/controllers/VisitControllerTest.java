@@ -67,7 +67,8 @@ class VisitControllerTest {
         uriVariables.put("petId", petId.toString());
         visitsUri = visitsUriTemplate.expand(uriVariables);
 
-        mockMvc = MockMvcBuilders.standaloneSetup(visitController).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(visitController).setControllerAdvice(new ControllerExceptionHandler())
+                .build();
     }
 
     @Test
