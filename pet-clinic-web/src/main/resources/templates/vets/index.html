@@ -15,6 +15,7 @@
                 <th style="width: 150px;">Id</th>
                 <th style="width: 150px;">First Name</th>
                 <th style="width: 150px;">Last Name</th>
+                <th style="width: 150px;">Specialties</th>
                 <th style="width: 150px;">Image</th>
                 <th style="width: 150px;">Actions</th>
             </tr>
@@ -24,6 +25,10 @@
                 <td th:text="${vet.id}">1</td>
                 <td th:text="${vet.firstName}">Joe</td>
                 <td th:text="${vet.lastName}">Buck</td>
+                <td><span th:each="specialty: ${vet.specialties}" th:text="${specialty.description+' '}" />
+                    <span th:if="${vet?.specialties?.size == 0}">none</span>
+
+                </td>
                 <td>
                     <img src="/resources/images/platform-bg.png" th:if="${vet != null && vet.image != null}"
                         th:src="@{'/images/' + ${vet.image.id + '/show'}}" width="50">
