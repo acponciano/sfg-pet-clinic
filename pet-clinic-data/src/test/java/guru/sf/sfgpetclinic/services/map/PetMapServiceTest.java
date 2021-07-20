@@ -1,6 +1,6 @@
 package guru.sf.sfgpetclinic.services.map;
 
-import guru.springframework.sfgpetclinic.model.Pet;
+import guru.sf.sfgpetclinic.model.Pet;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
